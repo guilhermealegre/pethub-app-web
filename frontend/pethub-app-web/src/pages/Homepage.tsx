@@ -7,8 +7,8 @@ const Homepage = () => {
     <>
       <div>
         <p>Homepage page</p>
-        <Mui />
-        <MaterialDesign />
+        {/* <Mui />
+        <MaterialDesign /> */}
       </div>
     </>
   );

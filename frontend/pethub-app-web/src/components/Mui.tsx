@@ -35,7 +35,9 @@ const Mui = () => {
       <p>Mui component</p>
       <p>https://mui.com/material-ui/all-components/</p>
       <div style={{ marginBottom: "24px" }}>
-        <Button variant="contained">Cenas</Button>
+        <Button color="secondary" variant="contained">
+          Cenas
+        </Button>
       </div>
 
       <div style={{ marginBottom: "24px" }}>
