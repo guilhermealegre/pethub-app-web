@@ -1,0 +1,6 @@
+/* @import "mdui/mdui.css";
+@import "mdui"; */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

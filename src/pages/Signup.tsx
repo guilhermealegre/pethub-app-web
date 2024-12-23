@@ -137,62 +137,92 @@ const Signup = () => {
 
   return (
     <>
-      <div className="container">
+      {/* <div className="container m-auto flex h-full grid grid-rows-2 grid-flow-col gap-0"> */}
+      {/* <div className="container m-auto h-full grid grid-cols-2 gap-0"> */}
+      <div className=" m-auto h-full grid grid-cols-2 gap-0">
         {/* {loading && <CircularProgress />} */}
 
-        <h1 className="text-3xl font-bold underline flex">Hello signup!</h1>
+        <section>
+          <div className="py-28 px-24">
+            <h1 className="text-3xl font-bold flex pb-14">Create an account</h1>
 
-        {viewMode === MODE.EMAIL && (
-          <form onSubmit={emailFormik.handleSubmit}>
-            <TextField
-              id="email"
-              name="email"
-              // type="email"
-              placeholder="email"
-              variant="outlined"
-              value={emailFormik.values.email}
-              onChange={emailFormik.handleChange}
-              error={emailFormik.errors.email ? true : false}
-              helperText={emailFormik.touched.email && emailFormik.errors.email ? emailFormik.errors.email : undefined}
-              onBlur={emailFormik.handleBlur}
-              required
-            />
-            <Button type="submit" color="secondary" variant="contained">
-              Submit email
-            </Button>
-          </form>
-        )}
+            {viewMode === MODE.EMAIL && (
+              <form onSubmit={emailFormik.handleSubmit}>
+                {/* <TextField
+                id="email"
+                name="email"
+                // type="email"
+                placeholder="email"
+                variant="outlined"
+                value={emailFormik.values.email}
+                onChange={emailFormik.handleChange}
+                error={emailFormik.errors.email ? true : false}
+                helperText={emailFormik.touched.email && emailFormik.errors.email ? emailFormik.errors.email : undefined}
+                onBlur={emailFormik.handleBlur}
+                required
+              /> */}
+                <div className="pb-8">
+                  <TextField
+                    id="email"
+                    name="email"
+                    fullWidth
+                    type="email"
+                    placeholder="email"
+                    variant="outlined"
+                    value={emailFormik.values.email}
+                    onChange={emailFormik.handleChange}
+                    onBlur={emailFormik.handleBlur}
+                    // required
+                  />
+                </div>
+                {/* checkbox do terms & conditions */}
+                <Button type="submit" color="primary" onClick={() => navigate("/login")} variant="contained">
+                  Back to login
+                </Button>
+                <Button type="submit" color="secondary" variant="contained">
+                  Continue
+                </Button>
+              </form>
+            )}
 
-        {viewMode === MODE.CODE && (
-          <form onSubmit={codeFormik.handleSubmit}>
-            <TextField
-              id="code"
-              name="code"
-              placeholder="code"
-              variant="outlined"
-              value={codeFormik.values.code}
-              onChange={codeFormik.handleChange}
-              onBlur={codeFormik.handleBlur}
-              error={codeFormik.errors.code ? true : false}
-              helperText={codeFormik.touched.code && codeFormik.errors.code ? codeFormik.errors.code : undefined}
-              required
-            />
-            <Button type="submit" color="secondary" variant="contained">
-              Submit code
-            </Button>
-          </form>
-        )}
-
-        <Button
-          type="submit"
-          onClick={() => {
-            console.log("cenas");
-          }}
-          color="secondary"
-          variant="contained"
-        >
-          Submit Alegre
-        </Button>
+            {viewMode === MODE.CODE && (
+              <form onSubmit={codeFormik.handleSubmit}>
+                {/* <TextField
+                id="code"
+                name="code"
+                placeholder="code"
+                variant="outlined"
+                value={codeFormik.values.code}
+                onChange={codeFormik.handleChange}
+                onBlur={codeFormik.handleBlur}
+                error={codeFormik.errors.code ? true : false}
+                helperText={codeFormik.touched.code && codeFormik.errors.code ? codeFormik.errors.code : undefined}
+                required
+              /> */}
+                <div className="pb-8">
+                  <TextField
+                    id="code"
+                    name="code"
+                    fullWidth
+                    type="code"
+                    placeholder="code"
+                    variant="outlined"
+                    value={codeFormik.values.code}
+                    onChange={codeFormik.handleChange}
+                    onBlur={codeFormik.handleBlur}
+                    // required
+                  />
+                </div>
+                <Button type="submit" color="secondary" variant="contained">
+                  Submit code
+                </Button>
+              </form>
+            )}
+          </div>
+        </section>
+        <section>
+          <img src="/dogpic2.png" className="w-full" />
+        </section>
       </div>
     </>
   );

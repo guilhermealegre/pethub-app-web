@@ -1,19 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.ts?(x)", "!./src/**/*.test.ts?(x)"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
-  corePlugins: {
-    preflight: false,
-  },
+  // corePlugins: {
+  //   preflight: false,
+  // },
   theme: {
     extend: {},
   },
   safelist: [
-    {
-      pattern: /./, // the "." means "everything"
-    },
+    // {
+    //   pattern: /./, // the "." means "everything"
+    // },
     { pattern: /^block/ },
     { pattern: /^col-(\w?)/ },
     { pattern: /^columns-/ },
