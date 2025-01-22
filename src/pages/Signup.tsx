@@ -3,6 +3,11 @@ import Cookies from "js-cookie";
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Google, Facebook, Microsoft, Apple } from "@mui/icons-material";
+
+// import AppleIcon from "../assets/apple_svg.svg";
+// import * as WindowsIcon from "/public//windows_svg.svg";
+// import * as GoogleIcon from "/public//google_svg.svg";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -13,6 +18,11 @@ import * as Yup from "yup";
 // import "mdui/components/text-field.js";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import { AppleIcon, GoogleIcon, WindowsIcon } from "../components/customIcons";
 // import CircularProgress from "@mui/material/CircularProgress";
 // import { codeValidator, emailValidator } from "../core/utils";
 // import type { TextField } from "mdui/components/text-field.js";
@@ -141,10 +151,13 @@ const Signup = () => {
       {/* <div className="container m-auto h-full grid grid-cols-2 gap-0"> */}
       <div className=" m-auto h-full grid grid-cols-2 gap-0">
         {/* {loading && <CircularProgress />} */}
-
         <section>
-          <div className="py-28 px-24">
-            <h1 className="text-3xl font-bold flex pb-14">Create an account</h1>
+          <img src="/dogpic2.png" className="w-full" />
+        </section>
+        <section className="relative">
+          <div className="py-28 px-44">
+            <h1 className="text-4xl font-bold flex pb-8">Olá, humans and furry friends!</h1>
+            <h2 className="text-lg flex pb-14">Inscreve-te para aceder a todos os serviços ou faz login na tua conta.</h2>
 
             {viewMode === MODE.EMAIL && (
               <form onSubmit={emailFormik.handleSubmit}>
@@ -172,16 +185,42 @@ const Signup = () => {
                     value={emailFormik.values.email}
                     onChange={emailFormik.handleChange}
                     onBlur={emailFormik.handleBlur}
-                    // required
+                    error={emailFormik.errors.email ? true : false}
+                    required
                   />
                 </div>
                 {/* checkbox do terms & conditions */}
-                <Button type="submit" color="primary" onClick={() => navigate("/login")} variant="contained">
+                {/* <Button type="submit" color="primary" onClick={() => navigate("/login")} variant="contained">
                   Back to login
+                </Button> */}
+                {/* <Button type="submit" color="secondary" variant="contained" fullWidth>
+                  Continua com o e-mail
+                </Button> */}
+                <Button type="submit" color="primary" variant="contained" fullWidth>
+                  Continua com o e-mail
                 </Button>
-                <Button type="submit" color="secondary" variant="contained">
-                  Continue
-                </Button>
+
+                <Divider className="pt-10 pb-10" variant="middle">
+                  Ou
+                </Divider>
+
+                <Box sx={{ display: "flex", flexDirection: "row", gap: 2, justifyContent: "space-between" }}>
+                  <div style={{ borderWidth: "1px", borderColor: "#617AFF" }} className="border-black rounded-md w-full flex justify-center">
+                    <IconButton onClick={() => alert("Sign in with Google")}>
+                      <GoogleIcon />
+                    </IconButton>
+                  </div>
+                  <div style={{ borderWidth: "1px", borderColor: "#617AFF" }} className="border-black rounded-md w-full flex justify-center">
+                    <IconButton onClick={() => alert("Sign in with Apple")}>
+                      <AppleIcon />
+                    </IconButton>
+                  </div>
+                  <div style={{ borderWidth: "1px", borderColor: "#617AFF" }} className="border-black rounded-md w-full flex justify-center">
+                    <IconButton onClick={() => alert("Sign in with Microsoft")}>
+                      <WindowsIcon />
+                    </IconButton>
+                  </div>
+                </Box>
               </form>
             )}
 
@@ -219,9 +258,12 @@ const Signup = () => {
               </form>
             )}
           </div>
-        </section>
-        <section>
-          <img src="/dogpic2.png" className="w-full" />
+          <div className="absolute bottom-14 left-0 right-0 flex flex-col items-center text-xs">
+            <p>Ao inscreveres-te estás a aceitar os</p>
+            <Link color="primary" href="http://www.google.pt" target="_blank">
+              Termos de utilização e a Politica de privacidade
+            </Link>
+          </div>
         </section>
       </div>
     </>
@@ -229,3 +271,30 @@ const Signup = () => {
 };
 
 export default Signup;
+
+{
+  /* <div className="a-flex a-gap-2 a-relative">
+  {[0, 1, 2, 3, 4, 5].map((index) => (
+    <input
+      className="a-text-2xl a-bg-neutral-300 a-w-10 a-flex a-p-2 a-text-center"
+      key={index}
+      type="text"
+      maxLength={1}
+      onChange={(e) => console.log(e)}
+      // ref={inputRefs[index]}
+      autoFocus={index === 0}
+      // onFocus={handleFocus}
+      onKeyDown={(e) => console.log(e)}
+      // onPaste={handlePaste}
+      // disabled={isLoading}
+    />
+  ))}
+  {
+        code.length
+            ?
+            <ClearButton />
+            :
+            <></>
+    }
+</div>; */
+}

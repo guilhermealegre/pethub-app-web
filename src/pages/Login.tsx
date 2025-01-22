@@ -88,6 +88,9 @@ const Login = () => {
       {/* <div className="container m-auto flex h-full"> */}
       {/* <div className="container m-auto h-full grid grid-cols-2 gap-0"> */}
       <div className=" m-auto h-full grid grid-cols-2 gap-0">
+        <section>
+          <img src="/dogpic.png" className="w-full" />
+        </section>
         {/* <section style={{ width: "50%" }}> */}
         <section>
           <div className="py-28 px-24">
@@ -174,9 +177,6 @@ const Login = () => {
           </div>
         </section>
         {/* <section style={{ width: "50%" }}> */}
-        <section>
-          <img src="/dogpic.png" className="w-full" />
-        </section>
       </div>
     </>
   );
