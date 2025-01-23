@@ -155,7 +155,7 @@ const Signup = () => {
           <img src="/dogpic2.png" className="w-full" />
         </section>
         <section className="relative">
-          <div className="py-28 px-44">
+          <div className="py-28 px-24">
             <h1 className="text-4xl font-bold flex pb-8">Olá, humans and furry friends!</h1>
             <h2 className="text-lg flex pb-14">Inscreve-te para aceder a todos os serviços ou faz login na tua conta.</h2>
 
@@ -205,17 +205,17 @@ const Signup = () => {
                 </Divider>
 
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2, justifyContent: "space-between" }}>
-                  <div style={{ borderWidth: "1px", borderColor: "#617AFF" }} className="border-black rounded-md w-full flex justify-center">
+                  <div style={{ borderWidth: "1px", borderColor: "#00A4EF" }} className="border-black rounded-md w-full flex justify-center">
                     <IconButton onClick={() => alert("Sign in with Google")}>
                       <GoogleIcon />
                     </IconButton>
                   </div>
-                  <div style={{ borderWidth: "1px", borderColor: "#617AFF" }} className="border-black rounded-md w-full flex justify-center">
+                  <div style={{ borderWidth: "1px", borderColor: "#D8D8D8" }} className="border-black rounded-md w-full flex justify-center">
                     <IconButton onClick={() => alert("Sign in with Apple")}>
                       <AppleIcon />
                     </IconButton>
                   </div>
-                  <div style={{ borderWidth: "1px", borderColor: "#617AFF" }} className="border-black rounded-md w-full flex justify-center">
+                  <div style={{ borderWidth: "1px", borderColor: "#D8D8D8" }} className="border-black rounded-md w-full flex justify-center">
                     <IconButton onClick={() => alert("Sign in with Microsoft")}>
                       <WindowsIcon />
                     </IconButton>
@@ -257,6 +257,17 @@ const Signup = () => {
                 </Button>
               </form>
             )}
+          </div>
+          <div className="mt-2 text-center">
+            <p className="text-sm">
+              Already have an account?{" "}
+              <Link 
+                href="/login" 
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Login here
+              </Link>
+            </p>
           </div>
           <div className="absolute bottom-14 left-0 right-0 flex flex-col items-center text-xs">
             <p>Ao inscreveres-te estás a aceitar os</p>

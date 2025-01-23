@@ -11,11 +11,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 // import TextField from "@mui/material/TextField";
 // import Button from "@mui/material/Button";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Box, IconButton } from "@mui/material";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
+import { AppleIcon, GoogleIcon, WindowsIcon } from "../components/customIcons";
+
 
 export interface FormPayloadInterface {
   email: string;
@@ -64,21 +66,20 @@ const Login = () => {
       },
     })
       .then((response) => {
-        //  Cookies.set('user', response.data.data.token, { expires: new Date(new Date().getTime() + 30 * 60 * 1000) });
+        Cookies.set('user', response.data.data.access_token, { 
+          expires: new Date(new Date().getTime() + 30 * 60 * 1000),
+          //httpOnly: true, 
+          //secure: true, 
+        });
+
         console.log(response);
-        // navigate('/');
-
-        // storeData(response.data);
-        // navigation.navigate("Dashboard");
-
-        // handleSaveTokenAndRedirect(response.data.data.access_token);
+        navigate('/');
       })
       .catch((error) => {
-        console.error(error);
-        // navigation.navigate("Dashboard");
-        // setFormErrors({
-        //   password: t('ERRORS.' + error?.response.data.errors[0]?.code, t('ERRORS.SOMETHING_WENT_WRONG')),
-        // });
+        console.error('Login error:', error);
+        setFormErrors({
+          password: error?.response?.data?.message || 'Invalid email or password',
+        });
       });
   };
 
@@ -92,45 +93,11 @@ const Login = () => {
           <img src="/dogpic.png" className="w-full" />
         </section>
         {/* <section style={{ width: "50%" }}> */}
-        <section>
+        <section className="relative">
           <div className="py-28 px-24">
             {loading && <CircularProgress />}
-
             <h1 className="text-7xl font-bold">Hi there!</h1>
-            <h3 className="text-lg font-bold ">Welcome to Pet Hub</h3>
-
-            <div>
-              <div className="flex justify-center items-center">
-                <Google color="info" />
-                <p>Google</p>
-              </div>
-              <GoogleLogo color="#0E5ABE" weight="light" size={20} />
-              <FacebookLogo color="#0E5ABE" weight="fill" size={20} />
-              <Facebook />
-              {/* <Button variant="outlined" startIcon={<Google />}>
-              Google
-            </Button>
-            <Button variant="outlined" color="error" startIcon={<Facebook />}>
-              Facebook
-            </Button>
-            <Button variant="outlined" color="inherit" startIcon={<Facebook />}>
-              Facebook
-            </Button>
-            <Button variant="outlined" color="primary" startIcon={<Facebook />}>
-              Facebook
-            </Button>
-            <Button variant="outlined" color="secondary" startIcon={<Facebook />}>
-              Facebook
-            </Button>
-            <Button variant="outlined" color="warning" startIcon={<Facebook />}>
-              Facebook
-            </Button>
-            <Button variant="outlined" style={{ borderColor: "#0063cc" }} startIcon={<Facebook />}>
-              Basic
-            </Button> */}
-            </div>
-
-            <Divider>or</Divider>
+            <h2 className="text-lg flex pb-14 ">Welcome to Pet Hub</h2>
 
             <form onSubmit={formik.handleSubmit}>
               <div className="pb-8">
@@ -163,18 +130,43 @@ const Login = () => {
                 />
               </div>
 
-              <Button fullWidth type="submit" color="secondary" variant="contained">
+              <Button fullWidth type="submit" color="primary" variant="contained">
                 Login
               </Button>
+            
 
-              <p>
-                Don't have an account? <Link href="/signup">Sign in</Link>
-              </p>
-              {/* <Button type="submit" onClick={() => navigate("/signup")} variant="contained">
-              Go to signup
-            </Button> */}
+              <Divider className="pt-10 pb-10" variant="middle" textAlign="center" style={{ color: '#696969' }}>
+                Ou
+              </Divider>
+
+              <Box sx={{ display: "flex", flexDirection: "row", gap: 2, justifyContent: "space-between" }}>
+                <div style={{ borderWidth: "1px", borderColor: "#D8D8D8" }} className="border-black rounded-md w-full flex justify-center">
+                  <IconButton onClick={() => alert("Sign in with Google")}>
+                    <GoogleIcon />
+                  </IconButton>
+                </div>
+                <div style={{ borderWidth: "1px", borderColor: "#D8D8D8" }} className="border-black rounded-md w-full flex justify-center">
+                  <IconButton onClick={() => alert("Sign in with Apple")}>
+                    <AppleIcon />
+                  </IconButton>
+                </div>
+                <div style={{ borderWidth: "1px", borderColor: "#D8D8D8" }} className="border-black rounded-md w-full flex justify-center">
+                  <IconButton onClick={() => alert("Sign in with Microsoft")}>
+                    <WindowsIcon />
+                  </IconButton>
+                </div>
+              </Box>
             </form>
           </div>
+          <div className="mt-2 text-center">
+          <p className="text-sm">
+          Don't have an account? {" "}
+          <Link 
+           href="/signup" 
+           className="text-blue-600 hover:text-blue-800 font-medium"
+            >Sign up </Link>
+         </p>
+      </div>
         </section>
         {/* <section style={{ width: "50%" }}> */}
       </div>
@@ -183,3 +175,7 @@ const Login = () => {
 };
 
 export default Login;
+function storeData(data: any) {
+  throw new Error("Function not implemented.");
+}
+

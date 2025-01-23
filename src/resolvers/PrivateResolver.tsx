@@ -1,52 +1,86 @@
 import useAxios from "axios-hooks";
 import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 type UserDataToken = {
-  firstName: string;
-  idShop: number;
-  idUserExternal: string;
-  languageCode: string;
-  lastName: string;
-  username: string;
-  authorizations: string[];
-};
+  user_uuid: string;
+  email: string;
+}
 
 const PrivateResolver = ({ children }: { children: JSX.Element }) => {
-  const [shopId, setShopId] = useState<number>();
   const userToken = Cookies.get("user");
+  const [user, setUser] = useState<UserDataToken & {isAuthenticated: boolean}>({
+    user_uuid: "",
+    email: "", 
+    isAuthenticated: false
+  });
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    console.log(1);
-    // if (userToken && !user?.isAuthenticated) {
-    //   const user = jwtDecode<UserDataToken>(userToken);
-    //   setUser({
-    //     isAuthenticated: true,
-    //     firstName: user.firstName,
-    //     idUserExternal: user.idUserExternal,
-    //     lastName: user.lastName,
-    //     userLogin: user.username,
-    //     authorizations: user.authorizations,
-    //     language: user.languageCode?.toLowerCase() ?? '',
-    //   });
+    const checkAuthentication = () => {
+      if (!userToken) {
+        setUser({
+          user_uuid: "",
+          email: "",
+          isAuthenticated: false
+        });
+        return;
+      }
 
-    //   switchAllLanguages(`${user.languageCode?.toLowerCase()}-${process.env.REACT_APP_MARKET}`);
-    //   setShopId(user.idShop);
+      try {
+        const decodedUser = jwtDecode<UserDataToken>(userToken);
 
-    //   getMarketDetails().then(response => {
-    //     setMarket(response.data.data);
-    //   });
-    // }
-  }, []);
+        // Check if token is expired
+        const tokenExp = (decodedUser as any).exp;
+        if (tokenExp && Date.now() >= tokenExp * 1000) {
+          Cookies.remove("user");
+          setUser({
+            user_uuid: "",
+            email: "",
+            isAuthenticated: false
+          });
+          return;
+        }
 
-  if (!userToken) {
-    return <Navigate to="/login" />;
+        console.log("estou aqui4")
+
+        setUser({
+          isAuthenticated: true,
+          email: decodedUser.email,
+          user_uuid: decodedUser.user_uuid
+        });
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        Cookies.remove("user");
+        setUser({
+          user_uuid: "",
+          email: "",
+          isAuthenticated: false
+        });
+      }
+    };
+
+    checkAuthentication();
+    console.log("estou aqui1")
+
+  }, [userToken]);
+  console.log("estou aqui")
+
+  if (!user.isAuthenticated) {
+    navigate("/login")
   }
 
-  return <>{children}</>;
+  if (window.location.pathname === '/') {
+    return <>{children}</>;
+  }
+  
+  console.log("estou aqui")
+  navigate("/");
+
 };
 
 export default PrivateResolver;

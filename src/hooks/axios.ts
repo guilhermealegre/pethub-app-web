@@ -5,7 +5,7 @@ import { clearData, getStoredData } from "../core/utils";
 export const axiosInstance = () => {
   const instance = axios.create({
     // baseURL: process.env.REACT_APP_API_URL,
-    baseURL: "http://localhost:4001/api/v1/",
+    baseURL: "http://localhost:9000/api/v1/",
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
