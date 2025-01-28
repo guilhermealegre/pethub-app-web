@@ -18,7 +18,6 @@ import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import { AppleIcon, GoogleIcon, WindowsIcon } from "../components/customIcons";
 
-
 export interface FormPayloadInterface {
   email: string;
   password: string;
@@ -66,19 +65,19 @@ const Login = () => {
       },
     })
       .then((response) => {
-        Cookies.set('user', response.data.data.access_token, { 
+        Cookies.set("user", response.data.data.access_token, {
           expires: new Date(new Date().getTime() + 30 * 60 * 1000),
-          //httpOnly: true, 
-          //secure: true, 
+          //httpOnly: true,
+          //secure: true,
         });
 
         console.log(response);
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
-        console.error('Login error:', error);
+        console.error("Login error:", error);
         setFormErrors({
-          password: error?.response?.data?.message || 'Invalid email or password',
+          password: error?.response?.data?.message || "Invalid email or password",
         });
       });
   };
@@ -133,9 +132,8 @@ const Login = () => {
               <Button fullWidth type="submit" color="primary" variant="contained">
                 Login
               </Button>
-            
 
-              <Divider className="pt-10 pb-10" variant="middle" textAlign="center" style={{ color: '#696969' }}>
+              <Divider className="pt-10 pb-10" variant="middle" textAlign="center" style={{ color: "#696969" }}>
                 Ou
               </Divider>
 
@@ -159,14 +157,13 @@ const Login = () => {
             </form>
           </div>
           <div className="mt-2 text-center">
-          <p className="text-sm">
-          Don't have an account? {" "}
-          <Link 
-           href="/signup" 
-           className="text-blue-600 hover:text-blue-800 font-medium"
-            >Sign up </Link>
-         </p>
-      </div>
+            <p className="text-sm">
+              Don't have an account?{" "}
+              <Link href="/signup" color="primary">
+                Sign up{" "}
+              </Link>
+            </p>
+          </div>
         </section>
         {/* <section style={{ width: "50%" }}> */}
       </div>
@@ -178,4 +175,3 @@ export default Login;
 function storeData(data: any) {
   throw new Error("Function not implemented.");
 }
-

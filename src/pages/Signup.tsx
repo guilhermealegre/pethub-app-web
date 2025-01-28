@@ -3,11 +3,7 @@ import Cookies from "js-cookie";
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Google, Facebook, Microsoft, Apple } from "@mui/icons-material";
-
-// import AppleIcon from "../assets/apple_svg.svg";
-// import * as WindowsIcon from "/public//windows_svg.svg";
-// import * as GoogleIcon from "/public//google_svg.svg";
+import VerificationInput from "react-verification-input";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -49,7 +45,9 @@ const Signup = () => {
   // const [formErrors, setFormErrors] = useState({ password: "" });
 
   const [email, setEmail] = useState<string>("");
-  const [viewMode, setViewMode] = useState<MODE>(MODE.EMAIL);
+  const [viewMode, setViewMode] = useState<MODE>(MODE.CODE);
+
+  const [code, setCode] = useState("");
 
   const EmailValidationSchema = Yup.object({
     email: Yup.string()
@@ -68,7 +66,7 @@ const Signup = () => {
     validationSchema: EmailValidationSchema,
     onSubmit: (formValue: EmailFormPayloadInterface) => {
       console.log("email cenas");
-      handleEmailSubmit(formValue.email);
+      handleEmailSubmit(formValue.email as string);
     },
   });
 
@@ -147,8 +145,6 @@ const Signup = () => {
 
   return (
     <>
-      {/* <div className="container m-auto flex h-full grid grid-rows-2 grid-flow-col gap-0"> */}
-      {/* <div className="container m-auto h-full grid grid-cols-2 gap-0"> */}
       <div className=" m-auto h-full grid grid-cols-2 gap-0">
         {/* {loading && <CircularProgress />} */}
         <section>
@@ -160,32 +156,20 @@ const Signup = () => {
             <h2 className="text-lg flex pb-14">Inscreve-te para aceder a todos os serviços ou faz login na tua conta.</h2>
 
             {viewMode === MODE.EMAIL && (
-              <form onSubmit={emailFormik.handleSubmit}>
-                {/* <TextField
-                id="email"
-                name="email"
-                // type="email"
-                placeholder="email"
-                variant="outlined"
-                value={emailFormik.values.email}
-                onChange={emailFormik.handleChange}
-                error={emailFormik.errors.email ? true : false}
-                helperText={emailFormik.touched.email && emailFormik.errors.email ? emailFormik.errors.email : undefined}
-                onBlur={emailFormik.handleBlur}
-                required
-              /> */}
+              <form onSubmit={emailFormik.handleSubmit} noValidate>
                 <div className="pb-8">
                   <TextField
                     id="email"
                     name="email"
                     fullWidth
-                    type="email"
+                    type="text"
                     placeholder="email"
                     variant="outlined"
                     value={emailFormik.values.email}
                     onChange={emailFormik.handleChange}
                     onBlur={emailFormik.handleBlur}
-                    error={emailFormik.errors.email ? true : false}
+                    error={(emailFormik.touched.email && emailFormik.errors.email) as boolean}
+                    helperText={emailFormik.touched.email && emailFormik.errors.email ? "Email is invalid!" : ""}
                     required
                   />
                 </div>
@@ -226,19 +210,7 @@ const Signup = () => {
 
             {viewMode === MODE.CODE && (
               <form onSubmit={codeFormik.handleSubmit}>
-                {/* <TextField
-                id="code"
-                name="code"
-                placeholder="code"
-                variant="outlined"
-                value={codeFormik.values.code}
-                onChange={codeFormik.handleChange}
-                onBlur={codeFormik.handleBlur}
-                error={codeFormik.errors.code ? true : false}
-                helperText={codeFormik.touched.code && codeFormik.errors.code ? codeFormik.errors.code : undefined}
-                required
-              /> */}
-                <div className="pb-8">
+                {/* <div className="pb-8">
                   <TextField
                     id="code"
                     name="code"
@@ -249,11 +221,19 @@ const Signup = () => {
                     value={codeFormik.values.code}
                     onChange={codeFormik.handleChange}
                     onBlur={codeFormik.handleBlur}
-                    // required
+                  />
+                </div> */}
+                <div className="pb-8">
+                  <VerificationInput
+                    placeholder=""
+                    onComplete={(value) => {
+                      console.log("filled: " + value);
+                      setCode(value);
+                    }}
                   />
                 </div>
-                <Button type="submit" color="secondary" variant="contained">
-                  Submit code
+                <Button type="submit" onClick={() => handleCodeSubmit(code)} color="primary" disabled={!code} variant="contained">
+                  Verificar código
                 </Button>
               </form>
             )}
@@ -261,10 +241,7 @@ const Signup = () => {
           <div className="mt-2 text-center">
             <p className="text-sm">
               Already have an account?{" "}
-              <Link 
-                href="/login" 
-                className="text-blue-600 hover:text-blue-800 font-medium"
-              >
+              <Link href="/login" className="text-blue-600 hover:text-blue-800 font-medium">
                 Login here
               </Link>
             </p>
@@ -282,30 +259,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-{
-  /* <div className="a-flex a-gap-2 a-relative">
-  {[0, 1, 2, 3, 4, 5].map((index) => (
-    <input
-      className="a-text-2xl a-bg-neutral-300 a-w-10 a-flex a-p-2 a-text-center"
-      key={index}
-      type="text"
-      maxLength={1}
-      onChange={(e) => console.log(e)}
-      // ref={inputRefs[index]}
-      autoFocus={index === 0}
-      // onFocus={handleFocus}
-      onKeyDown={(e) => console.log(e)}
-      // onPaste={handlePaste}
-      // disabled={isLoading}
-    />
-  ))}
-  {
-        code.length
-            ?
-            <ClearButton />
-            :
-            <></>
-    }
-</div>; */
-}

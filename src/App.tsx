@@ -7,6 +7,8 @@ import { axiosInstance } from "./hooks/axios";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import PrivateResolver from "./resolvers/PrivateResolver";
+import OnboardingAccount from "./pages/OnboardingAccount";
+import OnboardingServices from "./pages/OnboardingServices";
 
 configure({
   axios: axiosInstance(),
@@ -26,6 +28,8 @@ const App = () => {
           }
         />
 
+        <Route path="/onboarding-account" element={<OnboardingAccount></OnboardingAccount>} />
+        <Route path="/onboarding-services" element={<OnboardingServices></OnboardingServices>} />
         <Route path="/login" element={<Login></Login>} />
         <Route path="/signup" element={<Signup></Signup>} />
       </Routes>
