@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import PrivateResolver from "./resolvers/PrivateResolver";
 import OnboardingAccount from "./pages/OnboardingAccount";
 import OnboardingServices from "./pages/OnboardingServices";
+import ServicesToFind from "./pages/OnboardingServicesToFind";
 
 configure({
   axios: axiosInstance(),
@@ -27,9 +28,9 @@ const App = () => {
             </PrivateResolver>
           }
         />
-
         <Route path="/onboarding-account" element={<OnboardingAccount></OnboardingAccount>} />
         <Route path="/onboarding-services" element={<OnboardingServices></OnboardingServices>} />
+        <Route path="/onboarding-services-to-find" element={<ServicesToFind></ServicesToFind>} />
         <Route path="/login" element={<Login></Login>} />
         <Route path="/signup" element={<Signup></Signup>} />
       </Routes>
