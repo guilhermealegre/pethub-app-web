@@ -9,6 +9,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { PetHubLogo } from "../core/utils";
 
 export interface AccuntInterface {
   first_name: string;
@@ -42,7 +43,9 @@ const OnboardingAccount = () => {
     },
   });
   return (
-    <Container maxWidth="sm" className="py-28 px-24">
+    // <Container maxWidth="sm" className="py-28 px-24">
+    <Container maxWidth="sm" sx={{ textAlign: "center", py: 5, mt: 5 }}>
+      <PetHubLogo />
       <div className="pb-8">
         <Typography variant="h4" component="h2">
           Criar conta
@@ -52,7 +55,7 @@ const OnboardingAccount = () => {
         </Typography>
       </div>
       <form onSubmit={formik.handleSubmit} noValidate>
-        <p className="pb-4">Qual o teu nome?</p>
+        <p className="pb-4 text-left">Qual o teu nome?</p>
         <div className="pb-8">
           <TextField
             id="first_name"
@@ -143,7 +146,7 @@ const OnboardingAccount = () => {
             </MenuItem>
           </TextField>
         </div>
-        <p className="pb-4">E data de nascimento?</p>
+        <p className="pb-4 text-left">E data de nascimento?</p>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"en"}>
           <DatePicker
             key="date"
@@ -155,7 +158,7 @@ const OnboardingAccount = () => {
         </LocalizationProvider>
 
         <div className="pt-8">
-          <Button type="submit" color="primary" variant="contained">
+          <Button type="submit" fullWidth color="primary" variant="contained">
             Continuar
           </Button>
         </div>

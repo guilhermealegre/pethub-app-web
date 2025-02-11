@@ -81,6 +81,7 @@ const Signup = () => {
     },
   });
 
+  // typing axios
   const [{ loading: SaveEmailLoading }, saveEmail] = useAxios<any>(
     {
       url: "p/auth/email/signup",
@@ -89,6 +90,7 @@ const Signup = () => {
     { manual: true }
   );
 
+  // typing axios
   const [{ loading: SaveCodeLoading }, saveCode] = useAxios<any>(
     {
       url: "p/auth/email/signup/confirmation",
@@ -155,7 +157,7 @@ const Signup = () => {
             <h1 className="text-4xl font-bold flex pb-8">Olá, humans and furry friends!</h1>
             <h2 className="text-lg flex pb-14">Inscreve-te para aceder a todos os serviços ou faz login na tua conta.</h2>
 
-              {viewMode === MODE.EMAIL && (
+            {viewMode === MODE.EMAIL && (
               <form onSubmit={emailFormik.handleSubmit} noValidate>
                 <div className="pb-8">
                   <TextField

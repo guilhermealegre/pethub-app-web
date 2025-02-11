@@ -1,5 +1,25 @@
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import Box from "@mui/material/Box";
+import { PetHubIcon } from "../components/customIcons";
+import Typography from "@mui/material/Typography";
+
+export const PetHubLogo = () => (
+  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 4, justifyContent: "center" }}>
+    <PetHubIcon />
+    <Typography
+      variant="h5"
+      sx={{
+        color: "#617AFF",
+        fontWeight: "bold",
+        fontSize: "24px",
+      }}
+    >
+      Pethub
+    </Typography>
+  </Box>
+);
+
 export const emailValidator = (email: string) => {
   const re = /\S+@\S+\.\S+/;
 
